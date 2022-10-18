@@ -9,6 +9,7 @@ services:
     image: "ethereum/client-go:stable"
     restart: always
     hostname: geth
+    ports:
       - 30303:30303/tcp
       - 30303:30303/udp
       - 8545:8545
