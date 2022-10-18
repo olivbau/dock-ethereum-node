@@ -54,7 +54,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./caddy:/etc/caddy
+      - $PWD/caddy/Caddyfile:/etc/caddy/Caddyfile
     environment:
       - ADMIN_USER=${ADMIN_USER:?err}
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:?err}
