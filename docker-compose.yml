@@ -58,5 +58,6 @@ services:
     environment:
       - ADMIN_USER=${ADMIN_USER:?err}
       - ADMIN_PASSWORD_HASH=$ADMIN_PASSWORD_HASH
+    command: printenv
     networks:
       - monitor-net
