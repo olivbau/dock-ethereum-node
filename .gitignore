@@ -10,8 +10,10 @@ jwt.hex
 .env
 
 # Caddy
-caddy/*
-!caddy/Caddyfile
+caddy/config/*
+!caddy/config/.gitkeep
+caddy/data/*
+!caddy/data/.gitkeep
 
 # Prysm
 prysm/*
