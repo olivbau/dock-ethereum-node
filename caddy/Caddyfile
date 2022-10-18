@@ -1,6 +1,6 @@
 ethereum.rpc.sonar.watch {
         basicauth /* {
-                {$ADMIN_USER} $2a$14$uGcmCu2n1ITePJSwtuRmveI2VjCKNT.l6BoyycLnZzX8z4ywvXiUW
+                {$ADMIN_USER} ${ADMIN_PASSWORD_HASH}
         }
         reverse_proxy geth:8545
 }
