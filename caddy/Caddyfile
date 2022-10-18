@@ -1,4 +1,4 @@
-:80 {
+ethereum.rpc.sonar.watch {
         basicauth /* {
                 admin $2a$14$hFSIT2NT5bMY.AqmL3Hneu93A.fq7o.xL/fnronXTtqagDMpzmvy2
         }
