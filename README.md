@@ -24,6 +24,12 @@ docker run --rm caddy:2-alpine caddy hash-password --plaintext 'password'
 nano .env
 ```
 
+4. Setup UFW
+```bash
+ufw allow ssh
+ufw enable
+```
+
 4. Run
 ```bash
 docker compose up -d
