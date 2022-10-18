@@ -1,4 +1,4 @@
-ethereum.rpc.sonar.watch {
+:80 {
         basicauth /* {
                 {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
         }
