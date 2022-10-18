@@ -17,7 +17,7 @@ services:
     command: >
       --mainnet
       --syncmode snap
-      --http --http.vhosts=* --http.addr 0.0.0.0
+      --http --http.vhosts=* --http.addr geth
       --authrpc.port=8551
       --authrpc.addr=geth
       --authrpc.jwtsecret /root/.ethereum/jwt.hex
