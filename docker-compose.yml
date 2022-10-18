@@ -7,8 +7,9 @@ networks:
 services:
   geth:
     image: "ethereum/client-go:stable"
-    restart: always
+    container_name: geth
     hostname: geth
+    restart: always
     ports:
       - 30303:30303/tcp
       - 30303:30303/udp
@@ -28,8 +29,9 @@ services:
 
   beacon:
     image: "gcr.io/prysmaticlabs/prysm/beacon-chain:stable"
-    restart: always
+    container_name: beacon
     hostname: beacon
+    restart: always
     depends_on:
       - geth
     ports:
@@ -44,6 +46,7 @@ services:
 
   caddy:
     image: caddy:2-alpine
+    container_name: caddy
     depends_on:
       - geth
       - beacon
