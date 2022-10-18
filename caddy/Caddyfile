@@ -1,6 +1,3 @@
 :80 {
-        basicauth /* {
-                {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
-        }
         reverse_proxy geth:8545
 }
