@@ -1,0 +1,6 @@
+accept-terms-of-use: true
+datadir: /data
+execution-endpoint: http://geth:8545
+monitoring-host: 0.0.0.0
+grpc-gateway-host: 0.0.0.0
+rpc-host: 0.0.0.0

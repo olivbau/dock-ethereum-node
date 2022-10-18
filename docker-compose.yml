@@ -1,0 +1,48 @@
+version: "3.8"
+
+networks:
+  monitor-net:
+    driver: bridge
+
+services:
+  geth:
+    image: "ethereum/client-go:stable"
+    restart: always
+    hostname: geth
+      - 30303:30303/tcp
+      - 30303:30303/udp
+      - 127.0.0.1:8545:8545
+    volumes:
+      - ./geth:/root/.ethereum
+    command: --config=/root/.ethereum/geth-config.toml
+    networks:
+      - monitor-net
+
+  beacon:
+    image: "gcr.io/prysmaticlabs/prysm/beacon-chain:stable"
+    restart: always
+    hostname: beacon-chain
+    depends_on:
+      - geth
+    ports:
+      - 127.0.0.1:4000:4000
+      - 13000:13000/tcp
+      - 12000:12000/udp
+    volumes:
+      - ./prysm:/data
+    command: --config-file=/data/beacon-config.yaml
+    networks:
+      - monitor-net
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy:/etc/caddy
+    environment:
+      - ADMIN_USER=${ADMIN_USER}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH}

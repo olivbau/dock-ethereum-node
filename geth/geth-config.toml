@@ -1,0 +1,8 @@
+[Eth]
+NetworkId = 1
+SyncMode = "snap"
+
+[Node]
+HTTPHost = "0.0.0.0"
+HTTPPort = 8545
+HTTPVirtualHosts = ["*"]

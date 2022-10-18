@@ -1,0 +1,19 @@
+*DS_Store
+.vs/
+.vscode/
+.idea/
+
+# .env file
+.env
+
+# Caddy
+caddy/*
+!caddy/Caddyfile
+
+# Prysm
+prysm/*
+!prysm/beacon-config.yaml
+
+# Geth
+geth/*
+!geth/geth-config.toml
