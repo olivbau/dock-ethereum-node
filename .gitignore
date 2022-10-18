@@ -3,6 +3,9 @@
 .vscode/
 .idea/
 
+# jwt file
+jwt.hex
+
 # .env file
 .env
 
@@ -16,4 +19,4 @@ prysm/*
 
 # Geth
 geth/*
-!geth/geth-config.toml
+!geth/.gitkeep

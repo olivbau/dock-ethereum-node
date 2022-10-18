@@ -14,14 +14,21 @@ services:
       - 8545:8545
     volumes:
       - ./geth:/root/.ethereum
-    command: --config=/root/.ethereum/geth-config.toml
+    command: >
+      --mainnet
+      --syncmode snap
+      --http --http.vhosts=* --http.addr 0.0.0.0
+      --authrpc.port=8551
+      --authrpc.addr=geth
+      --authrpc.jwtsecret /root/.ethereum/jwt.hex
+      --authrpc.vhosts=*
     networks:
       - monitor-net
 
   beacon:
     image: "gcr.io/prysmaticlabs/prysm/beacon-chain:stable"
     restart: always
-    hostname: beacon-chain
+    hostname: beacon
     depends_on:
       - geth
     ports:
@@ -36,7 +43,9 @@ services:
 
   caddy:
     image: caddy:2-alpine
-    container_name: caddy
+    depends_on:
+      - geth
+      - beacon
     ports:
       - "80:80"
       - "443:443"
@@ -46,3 +55,5 @@ services:
       - ADMIN_USER=${ADMIN_USER}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH}
+    networks:
+      - monitor-net
