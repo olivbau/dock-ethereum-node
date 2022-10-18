@@ -56,8 +56,7 @@ services:
     volumes:
       - ./caddy:/etc/caddy
     environment:
-      - ADMIN_USER=${ADMIN_USER}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH}
+      - ADMIN_USER=${ADMIN_USER:?err}
+      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:?err}
     networks:
       - monitor-net
