@@ -1,4 +1,5 @@
 accept-terms-of-use: true
+mainnet: true
 datadir: /data
 execution-endpoint: http://geth:8551
 monitoring-host: 0.0.0.0
