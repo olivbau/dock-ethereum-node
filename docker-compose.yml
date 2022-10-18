@@ -57,6 +57,6 @@ services:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
     environment:
       - ADMIN_USER=${ADMIN_USER:?err}
-      - ADMIN_PASSWORD_HASH=$$$ADMIN_PASSWORD_HASH1$$$ADMIN_PASSWORD_HASH2$$$ADMIN_PASSWORD_HASH3
+      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:?err}
     networks:
       - monitor-net
