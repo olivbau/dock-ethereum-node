@@ -2,8 +2,8 @@
 
 ## Metrics
 
-* https://yourdomain.com/executionnode/metrics
-* https://yourdomain.com/beaconnode/metrics
+* `https://yourdomain.com/executionnode/metrics`
+* `https://yourdomain.com/beaconnode/metrics`
 
 ## Install 
 
