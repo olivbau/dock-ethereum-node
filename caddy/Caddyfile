@@ -1,6 +1,18 @@
-ethereum.rpc.sonar.watch {
+{$HOST} {
+
         basicauth /* {
                 {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
         }
+
+        handle /beacon/metrics {
+                rewrite /beacon/metrics /metrics
+                reverse_proxy beacon:8080
+        }
+
+        handle /geth/metrics {
+                rewrite /geth/metrics /debug/metrics
+                reverse_proxy geth:6060
+        }
+
         reverse_proxy geth:8545
 }
