@@ -1,5 +1,10 @@
 # Dock Ethereum Node
 
+## Metrics
+
+* https://yourdomain.com/executionnode/metrics
+* https://yourdomain.com/beaconnode/metrics
+
 ## Install 
 
 1. Clone the repository and
