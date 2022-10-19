@@ -4,9 +4,8 @@
 
 1. Clone the repository and
 ```bash
-git clone https://github.com/olivbau/dock-ethereum-node.git
-cd dock-ethereum-node
-
+git clone https://github.com/olivbau/docknode-eth.git
+cd docknode-eth
 ```
 
 2. Configure jwt.hex
