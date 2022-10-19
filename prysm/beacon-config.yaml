@@ -5,4 +5,4 @@ execution-endpoint: http://geth:8551
 monitoring-host: 0.0.0.0
 grpc-gateway-host: 0.0.0.0
 rpc-host: 0.0.0.0
-jwt-secret: /data/jwt.hex
+jwt-secret: /jwt.hex

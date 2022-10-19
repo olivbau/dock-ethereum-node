@@ -3,22 +3,8 @@
 .vscode/
 .idea/
 
-# jwt file
-jwt.hex
+# jwt.hex file
+**/jwt.hex
 
 # .env file
 .env
-
-# Caddy
-caddy/config/*
-!caddy/config/.gitkeep
-caddy/data/*
-!caddy/data/.gitkeep
-
-# Prysm
-prysm/*
-!prysm/beacon-config.yaml
-
-# Geth
-geth/*
-!geth/.gitkeep

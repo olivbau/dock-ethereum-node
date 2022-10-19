@@ -12,15 +12,17 @@ cd dock-ethereum-node
 2. Configure jwt.hex
 ```bash
 openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
-cp jwt.hex geth/jwt.hex
-cp jwt.hex prysm/jwt.hex
 ```
 
 3. Configure env vars
 ```bash
 cp .env.example .env
+
+# Generate users passwords
 docker run --rm caddy:2-alpine caddy hash-password --plaintext 'password'
-# Repace ADMIN_PASSWORD_HASH in .env file
+
+# Set users and passwords
+# Set the hostname
 nano .env
 ```
 

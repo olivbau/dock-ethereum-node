@@ -1,7 +1,7 @@
 {$HOST} {
 
         basicauth /* {
-                {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+                {$BASIC_AUTH_USERS}
         }
 
         handle /beacon/metrics {

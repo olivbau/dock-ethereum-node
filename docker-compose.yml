@@ -4,6 +4,12 @@ networks:
   monitor-net:
     driver: bridge
 
+volumes:
+  geth_data: {}
+  beacon_data: {}
+  caddy_data: {}
+  caddy_config: {}
+
 services:
   geth:
     image: "ethereum/client-go:stable"
@@ -16,14 +22,15 @@ services:
       - 127.0.0.1:8545:8545
       - 127.0.0.1:6060:6060
     volumes:
-      - ./geth:/root/.ethereum
+      - ./jwt.hex:/root/jwt.hex
+      - geth_data:/root/.ethereum
     command: >
       --mainnet
       --syncmode snap
       --http --http.vhosts=* --http.addr 0.0.0.0 --http.port 8545
       --authrpc.port=8551
       --authrpc.addr=geth
-      --authrpc.jwtsecret /root/.ethereum/jwt.hex
+      --authrpc.jwtsecret /root/jwt.hex
       --authrpc.vhosts=*
       --metrics
       --metrics.addr=geth
@@ -44,8 +51,10 @@ services:
       - 13000:13000/tcp
       - 12000:12000/udp
     volumes:
-      - ./prysm:/data
-    command: --config-file=/data/beacon-config.yaml
+      - ./prysm/beacon-config.yaml:/beacon-config.yaml
+      - ./jwt.hex:/jwt.hex
+      - beacon_data:/data
+    command: --config-file=/beacon-config.yaml
     networks:
       - monitor-net
 
@@ -60,11 +69,10 @@ services:
       - "443:443"
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - ./caddy/data:/data
-      - ./caddy/config:/config
+      - caddy_data:/data
+      - caddy_config:/config
     environment:
-      - ADMIN_USER=${ADMIN_USER:?err}
-      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:?err}
+      - BASIC_AUTH_USERS=${BASIC_AUTH_USERS:?err}
       - HOST=${HOST:?err}
     networks:
       - monitor-net
