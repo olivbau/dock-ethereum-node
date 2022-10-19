@@ -9,8 +9,8 @@
                 reverse_proxy beaconnode:8080
         }
 
-        handle /executionnode/metrics {
-                rewrite /executionnode/metrics /debug/metrics
+        handle /executionnode/metrics* {
+                uri replace /executionnode/metrics /debug/metrics
                 reverse_proxy executionnode:6060
         }
 
