@@ -4,15 +4,15 @@
                 {$BASIC_AUTH_USERS}
         }
 
-        handle /beacon/metrics {
-                rewrite /beacon/metrics /metrics
-                reverse_proxy beacon:8080
+        handle /beaconnode/metrics {
+                rewrite /beaconnode/metrics /metrics
+                reverse_proxy beaconnode:8080
         }
 
-        handle /geth/metrics {
-                rewrite /geth/metrics /debug/metrics
-                reverse_proxy geth:6060
+        handle /executionnode/metrics {
+                rewrite /executionnode/metrics /debug/metrics
+                reverse_proxy executionnode:6060
         }
 
-        reverse_proxy geth:8545
+        reverse_proxy executionnode:8545
 }

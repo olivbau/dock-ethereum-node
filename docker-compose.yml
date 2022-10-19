@@ -5,16 +5,16 @@ networks:
     driver: bridge
 
 volumes:
-  geth_data: {}
-  beacon_data: {}
+  executionnode_data: {}
+  beaconnode_data: {}
   caddy_data: {}
   caddy_config: {}
 
 services:
-  geth:
+  executionnode:
     image: "ethereum/client-go:stable"
-    container_name: geth
-    hostname: geth
+    container_name: executionnode
+    hostname: executionnode
     restart: unless-stopped
     ports:
       - 30303:30303/tcp
@@ -23,38 +23,38 @@ services:
       - 127.0.0.1:6060:6060
     volumes:
       - ./jwt.hex:/root/jwt.hex
-      - geth_data:/root/.ethereum
+      - executionnode_data:/root/.ethereum
     command: >
       --mainnet
       --syncmode snap
       --http --http.vhosts=* --http.addr 0.0.0.0 --http.port 8545
       --authrpc.port=8551
-      --authrpc.addr=geth
+      --authrpc.addr=executionnode
       --authrpc.jwtsecret /root/jwt.hex
       --authrpc.vhosts=*
       --metrics
-      --metrics.addr=geth
+      --metrics.addr=executionnode
       --metrics.port=6060
     networks:
       - monitor-net
 
-  beacon:
+  beaconnode:
     image: "gcr.io/prysmaticlabs/prysm/beacon-chain:stable"
-    container_name: beacon
-    hostname: beacon
+    container_name: beaconnode
+    hostname: beaconnode
     restart: unless-stopped
     depends_on:
-      - geth
+      - executionnode
     ports:
       - 127.0.0.1:4000:4000
       - 127.0.0.1:8080:8080
       - 13000:13000/tcp
       - 12000:12000/udp
     volumes:
-      - ./prysm/beacon-config.yaml:/beacon-config.yaml
+      - ./prysm/prysm-config.yaml:/prysm-config.yaml
       - ./jwt.hex:/jwt.hex
-      - beacon_data:/data
-    command: --config-file=/beacon-config.yaml
+      - beaconnode_data:/data
+    command: --config-file=/prysm-config.yaml
     networks:
       - monitor-net
 
@@ -62,8 +62,8 @@ services:
     image: caddy:2-alpine
     container_name: caddy
     depends_on:
-      - geth
-      - beacon
+      - executionnode
+      - beaconnode
     ports:
       - "80:80"
       - "443:443"
