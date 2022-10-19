@@ -43,4 +43,6 @@ ufw enable
 4. Run
 ```bash
 docker compose up -d
+docker logs -f beaconnode
+docker logs -f executionnode
 ```
