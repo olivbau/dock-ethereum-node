@@ -1,4 +1,4 @@
-# Dock Ethereum Node
+# Docknode ETH
 
 ## Metrics
 
