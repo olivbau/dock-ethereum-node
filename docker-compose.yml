@@ -82,6 +82,7 @@ services:
     depends_on:
       - executionnode
       - beaconnode
+      - nodeexporter
     ports:
       - "80:80"
       - "443:443"
