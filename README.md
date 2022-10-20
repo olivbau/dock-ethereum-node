@@ -37,7 +37,7 @@ ufw deny 8545 && ufw deny 3500 && ufw deny 8551 && ufw deny 4000
 ufw enable
 ```
 
-4. Run
+5. Run
 ```bash
 docker compose up -d
 docker logs -f beaconnode
