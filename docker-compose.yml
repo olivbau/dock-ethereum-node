@@ -1,7 +1,7 @@
 version: "3.8"
 
 networks:
-  docknode-eth-net:
+  docknode-eth:
     driver: bridge
 
 volumes:
@@ -36,7 +36,7 @@ services:
       --metrics.addr=executionnode
       --metrics.port=6060
     networks:
-      - docknode-eth-net
+      - docknode-eth
 
   beaconnode:
     image: "gcr.io/prysmaticlabs/prysm/beacon-chain:stable"
@@ -56,7 +56,7 @@ services:
       - beaconnode_data:/data
     command: --config-file=/prysm-config.yaml
     networks:
-      - docknode-eth-net
+      - docknode-eth
 
   caddy:
     image: caddy:2-alpine
@@ -75,4 +75,4 @@ services:
       - BASIC_AUTH_USERS=${BASIC_AUTH_USERS:?err}
       - HOST=${HOST:?err}
     networks:
-      - docknode-eth-net
+      - docknode-eth
