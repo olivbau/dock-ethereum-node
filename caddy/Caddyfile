@@ -4,6 +4,11 @@
                 {$BASIC_AUTH_USERS}
         }
 
+        handle /nodeexporter/metrics {
+                rewrite /nodeexporter/metrics /metrics
+                reverse_proxy nodeexporter:9100
+        }
+
         handle /beaconnode/metrics {
                 rewrite /beaconnode/metrics /metrics
                 reverse_proxy beaconnode:8080
