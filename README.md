@@ -18,25 +18,22 @@ cd docknode-eth
 openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 ```
 
-3. Configure env vars
+3. Configure environement variables
 ```bash
 cp .env.example .env
 
-# Generate users passwords
+# Generate users passwords for basic auth
 docker run --rm caddy:2-alpine caddy hash-password --plaintext 'password'
 
-# Set users and passwords
-# Set the hostname
+# Set users and passwords for basic auth
+# Set the host
 nano .env
 ```
 
 4. Setup UFW
 ```bash
 ufw allow ssh
-ufw deny 8545
-ufw deny 3500
-ufw deny 8551
-ufw deny 4000
+ufw deny 8545 && ufw deny 3500 && ufw deny 8551 && ufw deny 4000
 ufw enable
 ```
 
