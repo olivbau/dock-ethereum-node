@@ -24,7 +24,6 @@ services:
     volumes:
       - ./jwt.hex:/root/jwt.hex
       - executionnode_data:/root/.ethereum
-      - ./geth:/root/ipc
     command: >
       --mainnet
       --syncmode snap
@@ -36,7 +35,6 @@ services:
       --metrics
       --metrics.addr=executionnode
       --metrics.port=6060
-      --ipcpath /root/ipc/geth.ipc
     networks:
       - docknode-eth
 
