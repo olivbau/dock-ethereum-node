@@ -6,5 +6,8 @@
 # jwt.hex file
 **/jwt.hex
 
+# geth.ipc file
+**/geth.ipc
+
 # .env file
 .env
