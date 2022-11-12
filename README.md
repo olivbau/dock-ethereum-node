@@ -40,6 +40,7 @@ ufw enable
 
 5. Run
 ```bash
+docker compose pull # pull new images
 docker compose up -d
 docker logs -f beaconnode
 docker logs -f executionnode
