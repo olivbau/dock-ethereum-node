@@ -2,9 +2,9 @@
 
 ## Metrics
 
-* `https://yourdomain.com/executionnode/metrics`
-* `https://yourdomain.com/beaconnode/metrics`
-* `https://yourdomain.com/nodeexporter/metrics`
+* `https://yourdomain.com:9100/metrics`
+* `https://yourdomain.com:9101/metrics`
+* `https://yourdomain.com:9102/metrics`
 
 ## Install 
 

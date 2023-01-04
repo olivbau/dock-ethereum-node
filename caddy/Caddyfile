@@ -1,23 +1,27 @@
 {$HOST} {
-
         basicauth /* {
                 {$BASIC_AUTH_USERS}
         }
-
-        handle /nodeexporter/metrics {
-                rewrite /nodeexporter/metrics /metrics
-                reverse_proxy nodeexporter:9100
-        }
-
-        handle /beaconnode/metrics {
-                rewrite /beaconnode/metrics /metrics
-                reverse_proxy beaconnode:8080
-        }
-
-        handle /executionnode/metrics* {
-                uri replace /executionnode/metrics /debug/metrics
-                reverse_proxy executionnode:6060
-        }
-
         reverse_proxy executionnode:8545
+}
+
+{$HOST}:9100 {
+        basicauth /* {
+                {$BASIC_AUTH_USERS}
+        }
+        reverse_proxy nodeexporter:9100
+}
+
+{$HOST}:9101 {
+        basicauth /* {
+                {$BASIC_AUTH_USERS}
+        }
+        reverse_proxy executionnode:8545
+}
+
+{$HOST}:9102 {
+        basicauth /* {
+                {$BASIC_AUTH_USERS}
+        }
+        reverse_proxy beaconnode:8080
 }
