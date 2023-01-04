@@ -16,7 +16,7 @@
         basicauth /* {
                 {$BASIC_AUTH_USERS}
         }
-        reverse_proxy executionnode:8545
+        reverse_proxy executionnode:6060
 }
 
 {$HOST}:9102 {
