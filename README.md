@@ -48,7 +48,9 @@ ufw enable
 
 5. Run
 ```bash
-docker compose up -d --pull always
-docker logs -f beaconnode --since 1m
-docker logs -f executionnode --since 1m
+docker compose pull
+docker compose up -d
+docker logs -f docknode-eth-beaconnode-1 --since 1m
+docker logs -f docknode-eth-executionnode-1 --since 1m
+docker compose down
 ```
