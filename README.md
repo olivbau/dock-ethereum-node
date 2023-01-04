@@ -8,6 +8,14 @@
 
 ## Install 
 
+0. VPS config (optional)
+```bash
+apt update
+apt upgrade
+apt install git
+# install docker https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+```
+
 1. Clone the repository and
 ```bash
 git clone https://github.com/olivbau/docknode-eth.git
