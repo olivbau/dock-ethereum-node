@@ -23,6 +23,7 @@ services:
     expose:
       - 6060
       - 8545
+      - 8551
     command: >
       --mainnet
       --syncmode snap
@@ -50,7 +51,6 @@ services:
       - 13000:13000/tcp
       - 12000:12000/udp
     expose:
-      - 4000
       - 8080
     command: --config-file=/prysm-config.yaml
     networks:
