@@ -13,7 +13,7 @@ volumes:
 services:
   executionnode:
     image: "ethereum/client-go:stable"
-    restart: unless-stopped
+    restart: always
     volumes:
       - ./jwt.hex:/root/jwt.hex
       - executionnode_data:/root/.ethereum
@@ -40,7 +40,7 @@ services:
 
   beaconnode:
     image: "gcr.io/prysmaticlabs/prysm/beacon-chain:stable"
-    restart: unless-stopped
+    restart: always
     depends_on:
       - executionnode
     volumes:
@@ -60,7 +60,7 @@ services:
 
   nodeexporter:
     image: prom/node-exporter:v1.4.0
-    restart: unless-stopped
+    restart: always
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
@@ -77,7 +77,7 @@ services:
 
   caddy:
     image: caddy:2-alpine
-    restart: unless-stopped
+    restart: always
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
