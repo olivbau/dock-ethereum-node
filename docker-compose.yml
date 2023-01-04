@@ -40,6 +40,8 @@ services:
   beaconnode:
     image: "gcr.io/prysmaticlabs/prysm/beacon-chain:stable"
     restart: unless-stopped
+    depends_on:
+      - executionnode
     volumes:
       - ./prysm/prysm-config.yaml:/prysm-config.yaml
       - ./jwt.hex:/jwt.hex
