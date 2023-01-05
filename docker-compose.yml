@@ -12,7 +12,7 @@ volumes:
 
 services:
   executionnode:
-    image: "ethereum/client-go:stable"
+    image: "ethereum/client-go:latest"
     restart: always
     volumes:
       - ./jwt.hex:/root/jwt.hex
