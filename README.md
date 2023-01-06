@@ -50,7 +50,7 @@ ufw enable
 ```bash
 docker compose pull
 docker compose up -d
-docker logs -f docknode-eth-beaconnode-1 --since 1m
-docker logs -f docknode-eth-executionnode-1 --since 1m
+docker logs -f docknode-eth-beaconnode-1 --since 10m
+docker logs -f docknode-eth-executionnode-1 --since 10m
 docker compose down
 ```
