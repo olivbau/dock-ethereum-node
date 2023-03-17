@@ -40,7 +40,8 @@ ufw enable
 
 5. Run
 ```bash
-docker compose up -d --pull always
+docker compose pull
+docker compose up -d
 docker logs -f beaconnode --since 1m
 docker logs -f executionnode --since 1m
 ```
