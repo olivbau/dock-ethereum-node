@@ -2,11 +2,19 @@
 
 ## Metrics
 
-* `https://yourdomain.com/executionnode/metrics`
-* `https://yourdomain.com/beaconnode/metrics`
-* `https://yourdomain.com/nodeexporter/metrics`
+* `https://yourdomain.com:9100/metrics`
+* `https://yourdomain.com:9101/metrics`
+* `https://yourdomain.com:9102/metrics`
 
 ## Install 
+
+0. VPS config (optional)
+```bash
+apt update
+apt upgrade
+apt install git
+# install docker https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+```
 
 1. Clone the repository and
 ```bash
@@ -34,7 +42,7 @@ nano .env
 4. Setup UFW
 ```bash
 ufw allow ssh
-ufw deny 8545 && ufw deny 3500 && ufw deny 8551 && ufw deny 4000
+ufw deny 8545 && ufw deny 8551 && ufw deny 3500 && ufw deny 4000 && ufw deny 8080
 ufw enable
 ```
 
@@ -42,6 +50,7 @@ ufw enable
 ```bash
 docker compose pull
 docker compose up -d
-docker logs -f beaconnode --since 1m
-docker logs -f executionnode --since 1m
+docker logs -f docknode-eth-beaconnode-1 --since 10m
+docker logs -f docknode-eth-executionnode-1 --since 10m
+docker compose down
 ```

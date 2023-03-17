@@ -12,18 +12,18 @@ volumes:
 
 services:
   executionnode:
-    image: "ethereum/client-go:stable"
-    container_name: executionnode
-    hostname: executionnode
-    restart: unless-stopped
-    ports:
-      - 30303:30303/tcp
-      - 30303:30303/udp
-      - 127.0.0.1:8545:8545
-      - 127.0.0.1:6060:6060
+    image: "ethereum/client-go:latest"
+    restart: always
     volumes:
       - ./jwt.hex:/root/jwt.hex
       - executionnode_data:/root/.ethereum
+    ports:
+      - 30303:30303/tcp
+      - 30303:30303/udp
+    expose:
+      - 6060
+      - 8545
+      - 8551
     command: >
       --mainnet
       --syncmode snap
@@ -40,56 +40,54 @@ services:
 
   beaconnode:
     image: "gcr.io/prysmaticlabs/prysm/beacon-chain:stable"
-    container_name: beaconnode
-    hostname: beaconnode
-    restart: unless-stopped
+    restart: always
     depends_on:
       - executionnode
-    ports:
-      - 127.0.0.1:4000:4000
-      - 127.0.0.1:8080:8080
-      - 13000:13000/tcp
-      - 12000:12000/udp
     volumes:
       - ./prysm/prysm-config.yaml:/prysm-config.yaml
       - ./jwt.hex:/jwt.hex
       - beaconnode_data:/data
+    ports:
+      - 13000:13000/tcp
+      - 12000:12000/udp
+    expose:
+      - 3500
+      - 4000
+      - 8080
     command: --config-file=/prysm-config.yaml
     networks:
       - docknode-eth
 
   nodeexporter:
     image: prom/node-exporter:v1.4.0
-    container_name: nodeexporter
-    restart: unless-stopped
+    restart: always
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
+    expose:
+      - 9100
     command:
       - '--path.procfs=/host/proc'
       - '--path.rootfs=/rootfs'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
-    expose:
-      - 9100
     networks:
       - docknode-eth
 
   caddy:
     image: caddy:2-alpine
-    container_name: caddy
-    depends_on:
-      - executionnode
-      - beaconnode
-      - nodeexporter
-    ports:
-      - "80:80"
-      - "443:443"
+    restart: always
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+      - "9100:9100"
+      - "9101:9101"
+      - "9102:9102"
     environment:
       - BASIC_AUTH_USERS=${BASIC_AUTH_USERS:?err}
       - HOST=${HOST:?err}
