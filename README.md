@@ -2,13 +2,14 @@
 
 ## Metrics
 
-* `https://yourdomain.com:9100/metrics`
-* `https://yourdomain.com:9101/metrics`
-* `https://yourdomain.com:9102/metrics`
+- `https://yourdomain.com:9100/metrics`
+- `https://yourdomain.com:9101/metrics`
+- `https://yourdomain.com:9102/metrics`
 
-## Install 
+## Install
 
 0. VPS config (optional)
+
 ```bash
 apt update
 apt upgrade
@@ -20,17 +21,20 @@ apt update && apt upgrade -y && apt install -y git
 ```
 
 1. Clone the repository and
+
 ```bash
 git clone https://github.com/olivbau/docknode-eth.git
 cd docknode-eth
 ```
 
 2. Configure jwt.hex
+
 ```bash
 openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 ```
 
 3. Configure environement variables
+
 ```bash
 cp .env.example .env
 
@@ -43,6 +47,7 @@ nano .env
 ```
 
 4. Setup UFW
+
 ```bash
 ufw allow ssh
 ufw deny 8545 && ufw deny 8551 && ufw deny 3500 && ufw deny 4000 && ufw deny 8080
@@ -50,6 +55,7 @@ ufw enable
 ```
 
 5. Run
+
 ```bash
 docker compose pull
 docker compose up -d
